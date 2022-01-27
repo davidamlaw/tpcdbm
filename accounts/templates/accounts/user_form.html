@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <h3>{{ form.email.value }}</h3>
+  <h5>{{ form.username.value }} : {{ form.first_name.value }} {{ form.last_name.value }}</h5>
+  <p>{{ form.errors }}</p>
+  <form method="POST">
+    {% csrf_token %}
+    <!-- {{ form.as_p }} -->
+    <p><strong>Email: </strong>{{ form.email }}</p>
+    <p><strong>Username: </strong>{{ form.username }}</p>
+    <p><strong>First Name: </strong>{{ form.first_name }}</p>
+    <p><strong>Last Name: </strong>{{ form.last_name }}</p>
+    <p><strong>Active: </strong>{{ form.is_active }}</p>
+    <p><strong>Employment Supports: </strong>{{ form.employment_supports }}</p>
+    <p><strong>Day Hab: </strong>{{ form.day_hab }}</p>
+    <p><strong>Specialized Supports: </strong>{{ form.specialized_supports }}</p>
+    <p><strong>CBDS: </strong>{{ form.cbds }}</p>
+    <p><strong>Role: </strong>{{ form.role }}</p>
+    <p>Account Created: {{ form.date_joined.value }}</p>
+    <input type="hidden" name="date_joined" value="2022-01-20 15:26:34" required="" id="id_date_joined">
+    <p><strong>Can Create Accounts: </strong>{{ form.is_admin }}</p>
+    <input type="submit" class="btn btn-dark" value="Save">
+  </form>
+</div>
+
+{% endblock %}

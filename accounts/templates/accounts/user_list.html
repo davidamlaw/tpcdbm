@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mycontent">
+  <h3>Price Center DBM Users:</h3>
+  {% for user in user_list %}
+  <div class="user">
+    <a href="{% url 'accounts:user_form' slug=user.username %}" style="text-decoration:none">
+      <strong> {{ user.username }} </strong>
+    </a> | {{ user.first_name }} {{ user.last_name }} | {{ user.email }} |
+    {% if user.employment_supports %} ES | {% endif %}
+    {% if user.day_hab %} DH | {% endif %}
+    {% if user.specialized_supports %} SS | {% endif %}
+    {% if user.cbds %} CBDS | {% endif %}
+    {% if user.role == '0' %} <strong>Unassigned</strong> {% endif %}
+    {% if user.role == '1' %} <strong>Staff</strong> {% endif %}
+    {% if user.role == '2' %} <strong>Supervisor</strong> {% endif %}
+    {% if user.role == '3' %} <strong>Administrator</strong> {% endif %}
+    {% if user.role == '4' %} <strong>System Administrator</strong> {% endif %}
+    {% if user.is_active %} <font style="color:blue">(Active)</font>
+    {% else %}
+    <font style="color:red">(Deactivated)</font>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
