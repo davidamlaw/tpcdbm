@@ -4,26 +4,62 @@
 
 <div class="container mycontent">
   <h3>Price Center DBM Users:</h3>
+  <table>
+    <tr style="color:#666666">
+      <th><strong>Username</strong></th>
+      <th><strong>Name</strong></th>
+      <th><strong>Email</strong></th>
+      <th><strong>Departments</strong></th>
+      <th><strong>Roll</strong></th>
+      <th><strong>Is Active</strong></th>
+    </tr>
+
   {% for user in user_list %}
-  <div class="user">
-    <a href="{% url 'accounts:user_form' slug=user.username %}" style="text-decoration:none">
-      <strong> {{ user.username }} </strong>
-    </a> | {{ user.first_name }} {{ user.last_name }} | {{ user.email }} |
-    {% if user.employment_supports %} ES | {% endif %}
-    {% if user.day_hab %} DH | {% endif %}
-    {% if user.specialized_supports %} SS | {% endif %}
-    {% if user.cbds %} CBDS | {% endif %}
-    {% if user.role == '0' %} <strong>Unassigned</strong> {% endif %}
-    {% if user.role == '1' %} <strong>Staff</strong> {% endif %}
-    {% if user.role == '2' %} <strong>Supervisor</strong> {% endif %}
-    {% if user.role == '3' %} <strong>Administrator</strong> {% endif %}
-    {% if user.role == '4' %} <strong>System Administrator</strong> {% endif %}
-    {% if user.is_active %} <font style="color:blue">(Active)</font>
+    {% if forloop.counter0|divisibleby:2 %}
+      <tr style="background:#dddddd">
     {% else %}
-    <font style="color:red">(Deactivated)</font>
+      <tr>
     {% endif %}
-  </div>
+      <td style="padding-right:20px">
+        <a href="{% url 'accounts:user_form' slug=user.username %}" style="text-decoration:none">
+        <strong> {{ user.username }} </strong>
+        </a>
+      </td>
+      <td style="padding-right:20px">
+        <a href="{% url 'accounts:user_form' slug=user.username %}" style="text-decoration:none;color:black">
+          {{ user.first_name }} {{ user.last_name }}</td>
+        </a>
+      <td style="padding-right:20px">
+        <em>
+          <a href="{% url 'accounts:user_form' slug=user.username %}" style="text-decoration:none;color:black">
+            {{ user.email }}
+          </a>
+        </em>
+      </td>
+      <td style="padding-right:20px">
+        |
+        {% if user.employment_supports %} ES | {% endif %}
+        {% if user.day_hab %} DH | {% endif %}
+        {% if user.specialized_supports %} SS | {% endif %}
+        {% if user.cbds %} CBDS | {% endif %}
+      </td>
+      <td style="padding-right:20px">
+        <font style="color:#663366">
+        {% if user.role == '0' %} <strong>Unassigned</strong> {% endif %}
+        {% if user.role == '1' %} <strong>Staff</strong> {% endif %}
+        {% if user.role == '2' %} <strong>Supervisor</strong> {% endif %}
+        {% if user.role == '3' %} <strong>Administrator</strong> {% endif %}
+        {% if user.role == '4' %} <strong>System Administrator</strong> {% endif %}
+        </font>
+      </td>
+      <td style="padding-right:20px">
+        {% if user.is_active %} <font style="color:blue">(Active)</font>
+        {% else %}
+        <font style="color:red">(Deactivated)</font>
+        {% endif %}
+      </td>
+    </tr>
   {% endfor %}
-</div>
+  </table>
 
 {% endblock %}
