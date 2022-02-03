@@ -3,7 +3,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Price Center DBM</title>
+    <title>Day Center DBM</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'tpcdbm/css/tpcdbm.css' %}">
@@ -11,15 +11,17 @@
   <body>
     <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark mynav">
       <div class="container-fluid">
-        <a class="navbar-brand mynav" href="{% url 'home' %}">Price Center DBM</a>
+        <a class="navbar-brand mynav" href="{% url 'home' %}">Day Center DBM</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
           <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="#">Welcome: {{ user.username }}</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:user_list' %}">Staff</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Login: <strong>{{ user.username }}</strong></a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'clients:client_list' %}">Clients</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'clients:client_add' %}">Add Client</a></li>
             {% if user.admin %}
+              <li class="nav-item"><a class="nav-link" href="{% url 'accounts:user_list' %}">Staff</a></li>
               <li class="nav-item"><a class="nav-link" href="{% url 'accounts:adduser' %}">Add User</a></li>
             {% endif %}
             <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Log Out</a></li>
