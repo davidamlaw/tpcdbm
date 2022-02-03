@@ -1,0 +1,676 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <table style="width:1200px">
+    <tr>
+      <th style="width:400px; text-align:left">
+        <strong>Date Reviewed: {{ clientefs.date_reviewed }} </strong><br/>
+        <strong>Last Updated By: {{ clientefs.update_first_name }} {{ clientefs.update_last_name }}</strong>
+      </th>
+      <th style="width:600px; text-align:left"><h3>EMERGENCY FACT SHEET </h3></th>
+      <th style="width:200px; text-align:right">
+        Page <strong>1</strong> of <strong>2</strong>
+        <a href="{% url 'clients:client_update' pk=clientefs.id %}">
+          <button type="button" class="btn btn-danger">Edit EFS</button>
+        </a>
+      </th>
+    </tr>
+  </table>
+  <table style="width:1200px">
+    <tr>
+      <td style="width:996px">
+        <table style="border:0px">
+          <tr>
+            <td style="width:166px"></td>
+            <td style="width:166px"></td>
+            <td style="width:166px"></td>
+            <td style="width:166px"></td>
+            <td style="width:166px"></td>
+            <td style="width:166px"></td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-left:2px solid black; border-top:2px solid black; padding-left:10px">
+              <small>NAME:</small> <strong><font style="color:blue">{{ clientefs.first_name }}</font></strong>
+            </td>
+            <td colspan="2" style="border-top:2px solid black;">
+                <strong><font style="color:blue">{{ clientefs.last_name }}</font></strong>
+            </td>
+            <td colspan="2" style="border:2px solid black; padding-left:10px">
+              <small>NICKNAME:</small> <strong><font style="color:blue">{{ clientefs.nickname }}</font></strong>
+            </td>
+          </tr>
+          <tr style="border-left:2px solid black; border-right:2px solid black; border-top:2px solid black">
+            <td colspan="6" style="padding-left:10px">
+              <small>CURRENT ADDRESS:</small>
+            </td>
+          </tr>
+          <tr style="border-left:2px solid black; border-right:2px solid black;">
+            <td colspan="2" style="padding-left:10px">
+              <strong><font style="color:blue">{{ clientefs.current_address }}</font></strong>
+            </td>
+            <td colspan="2">
+              <small>CITY: </small><strong><font style="color:blue">{{ clientefs.ca_city }}</font></strong>
+            </td>
+            <td colspan="2">
+              <small>STATE: </small><strong><font style="color:blue">{{ clientefs.ca_state }}</font></strong>
+              &nbsp; &nbsp; &nbsp; <small>ZIP CODE: </small>
+              <strong><font style="color:blue">{{ clientefs.ca_zip }}</font></strong>
+            </td>
+          </tr>
+          <tr style="border:2px solid black">
+            <td colspan="4" style="padding-left:10px">
+              <small>PHONE#: </small><strong><font style="color:blue">{{ clientefs.phone1 }}</font></strong>
+              <small>EXT: </small><strong><font style="color:blue">{{ clientefs.ext1 }}</font></strong>
+            </td>
+            <td colspan="2">
+              <small>PHONE#: </small><strong><font style="color:blue">{{ clientefs.phone2 }}</font></strong>
+              <small>EXT: </small><strong><font style="color:blue">{{ clientefs.ext2 }}</font></strong>
+            </td>
+          </tr>
+          <tr style="border-left:2px solid black; border-right:2px solid black; border-top:2px solid black">
+            <td colspan="6" style="padding-left:10px">
+              <small>PREVIOUS ADDRESS (If Different):</small>
+            </td>
+          </tr>
+          <tr style="border-left:2px solid black; border-right:2px solid black;">
+            <td colspan="2" style="padding-left:10px">
+              <strong><font style="color:blue">{{ clientefs.previous_address }}</font></strong>
+            </td>
+            <td colspan="2">
+              <small>CITY: </small><strong><font style="color:blue">{{ clientefs.pa_city }}</font></strong>
+            </td>
+            <td colspan="2">
+              <small>STATE: </small><strong><font style="color:blue">{{ clientefs.pa_state }}</font></strong>
+              &nbsp; &nbsp; &nbsp; <small>ZIP CODE: </small>
+              <strong><font style="color:blue">{{ clientefs.pa_zip }}</font></strong>
+            </td>
+          </tr>
+          <tr style="border-left:2px solid black; border-right:2px solid black; border-top:2px solid black">
+            <td colspan="6" style="padding-left:10px">
+              <small>FAMILY ADDRESS (If Different):</small>
+            </td>
+          </tr>
+          <tr style="border-left:2px solid black; border-right:2px solid black;">
+            <td colspan="2" style="padding-left:10px">
+              <strong><font style="color:blue">{{ clientefs.family_address }}</font></strong>
+            </td>
+            <td colspan="2">
+              <small>CITY: </small><strong><font style="color:blue">{{ clientefs.fa_city }}</font></strong>
+            </td>
+            <td colspan="2">
+              <small>STATE: </small><strong><font style="color:blue">{{ clientefs.fa_state }}</font></strong>
+              &nbsp; &nbsp; &nbsp; <small>ZIP CODE: </small>
+              <strong><font style="color:blue">{{ clientefs.fa_zip }}</font></strong>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1" style="border:2px solid black; padding-left:10px">
+              <small>GENDER:</small><br/>
+              <strong><font style="color:blue">{{ clientefs.gender }}</font></strong>
+            </td>
+            <td colspan="2" style="border:2px solid black; padding-left:10px">
+              <small>RACE:</small><br/>
+              <strong><font style="color:blue">{{ clientefs.race }}</font></strong>
+            </td>
+            <td colspan="1" style="border:2px solid black; padding-left:10px">
+              <small>DOB:</small><br/>
+              <strong><font style="color:blue">{{ clientefs.dob }}</font></strong>
+            </td>
+            <td colspan="1" style="border:2px solid black; padding-left:10px">
+              <small>AGE:</small><br/>
+              <strong><font style="color:blue">{{ clientefs.age }}</font></strong>
+            </td>
+            <td colspan="1" style="border:2px solid black; padding-left:10px">
+              <small>HEIGHT:</small><br/>
+              <strong><font style="color:blue">{{ clientefs.height_ft }}</font></strong><small>FT</small>
+              <strong><font style="color:blue">{{ clientefs.height_in }}</font></strong><small>IN</small>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td style="width:204px; text-align:center; border:2px solid black">
+        {% if clientefs.photo %}<img src="{{ clientefs.photo.url }}">{% else %} No Photo Available{% endif %}
+      </td>
+    </tr>
+  </table>
+  <table style="width:1200px; border-colapse:colapse">
+    <tr>
+      <td style="border:2px solid black; padding-left:10px">
+        <small>WEIGHT:</small><br/>
+        <strong><font style="color:blue">{{ clientefs.weight }}</font></strong> <small>LBS</small>
+      </td>
+      <td style="border:2px solid black; padding-left:10px">
+        <small>BUILD:</small><br/>
+        <strong><font style="color:blue">{{ clientefs.build }}</font></strong>
+      </td>
+      <td style="border:2px solid black; padding-left:10px">
+        <small>HAIR:</small> <strong><font style="color:blue">{{ clientefs.hair }}</font></strong><br/>
+        <small>EYE COLOR:</small> <strong><font style="color:blue">{{ clientefs.eye_color }}</font></strong>
+      </td>
+      <td style="border:2px solid black; padding-left:10px">
+        <small>RESUSCITATION STATUS:</small><br/>
+        <strong><font style="color:blue">{{ clientefs.resuscitation_status }}</font></strong>
+      </td>
+      <td style="border:2px solid black; text-align:center">
+        <small>PHOTO DATE:</small><br/>
+        <strong><font style="color:blue">{{ clientefs.photo_date }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>LEGAL COMPETENCY STATUS:</small>
+        <strong><font style="color:blue">{{ clientefs.legal_competency_status }}</font></strong>
+      </td>
+      <td colspan="2" style="padding-left:10px">
+        <small>LANGUAGE/COMMUNICATION</small>
+        <strong><font style="color:blue">{{ clientefs.language }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border:2px solid black">
+      <td style="padding-left:10px">
+        <small>IDENTIFYING MARKS:</small>
+        <strong><font style="color:blue">{{ clientefs.identifying_marks }}</font></strong>
+      </td>
+    </tr>
+  </table>
+  <table style="width:1200px">
+    <tr style="border-left:2px solid black; border-right:2px solid black">
+      <td style="padding-left:10px">
+        <small>GAURDIAN:</small>
+        <strong><font style="color:blue">{{ clientefs.guardian1 }}</font></strong>
+      </td>
+      <td style="width:300px">
+        &nbsp;
+      </td>
+      <td>
+        <small>RELATIONSHIP:</small>
+        <strong><font style="color:blue">{{ clientefs.g1_relationship }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black">
+      <td style="padding-left:10px">
+        <small>ADDRESS:</small>
+        <strong><font style="color:blue">{{ clientefs.g1_address }}</font></strong>
+      </td>
+      <td>
+        <small>CITY:</small>
+        <strong><font style="color:blue">{{ clientefs.g1_city }}</font></strong>
+      </td>
+      <td>
+        <small>STATE:</small>
+        <strong><font style="color:blue">{{ clientefs.g1_state }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>ZIP CODE:</small>
+        <strong><font style="color:blue">{{ clientefs.g1_zip }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>HOME:</small>
+        <strong><font style="color:blue">{{ clientefs.g1_home }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>WORK:</small>
+        <strong><font style="color:blue">{{ clientefs.g1_work }}</font></strong>
+        <small>EXT:</small>
+        <strong><font style="color:blue">{{ clientefs.g1_ext }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>CELL:</small>
+        <strong><font style="color:blue">{{ clientefs.g1_cell }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>EMAIL:</small>
+        <strong><font style="color:blue">{{ clientefs.g1_email }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black">
+      <td style="padding-left:10px">
+        <small>GAURDIAN:</small>
+        <strong><font style="color:blue">{{ clientefs.guardian2 }}</font></strong>
+      </td>
+      <td style="width:300px">
+        &nbsp;
+      </td>
+      <td>
+        <small>RELATIONSHIP:</small>
+        <strong><font style="color:blue">{{ clientefs.g2_relationship }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black">
+      <td style="padding-left:10px">
+        <small>ADDRESS:</small>
+        <strong><font style="color:blue">{{ clientefs.g2_address }}</font></strong>
+      </td>
+      <td>
+        <small>CITY:</small>
+        <strong><font style="color:blue">{{ clientefs.g2_city }}</font></strong>
+      </td>
+      <td>
+        <small>STATE:</small>
+        <strong><font style="color:blue">{{ clientefs.g2_state }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>ZIP CODE:</small>
+        <strong><font style="color:blue">{{ clientefs.g2_zip }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>HOME:</small>
+        <strong><font style="color:blue">{{ clientefs.g2_home }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>WORK:</small>
+        <strong><font style="color:blue">{{ clientefs.g2_work }}</font></strong>
+        <small>EXT:</small>
+        <strong><font style="color:blue">{{ clientefs.g2_ext }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>CELL:</small>
+        <strong><font style="color:blue">{{ clientefs.g2_cell }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>EMAIL:</small>
+        <strong><font style="color:blue">{{ clientefs.g2_email }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black">
+      <td style="padding-left:10px">
+        <small>CONTACT:</small>
+        <strong><font style="color:blue">{{ clientefs.contact1 }}</font></strong>
+      </td>
+      <td style="width:300px">
+        &nbsp;
+      </td>
+      <td>
+        <small>RELATIONSHIP:</small>
+        <strong><font style="color:blue">{{ clientefs.c1_relationship }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>HOME:</small>
+        <strong><font style="color:blue">{{ clientefs.c1_home }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>WORK:</small>
+        <strong><font style="color:blue">{{ clientefs.c1_work }}</font></strong>
+        <small>EXT:</small>
+        <strong><font style="color:blue">{{ clientefs.c1_ext }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>CELL:</small>
+        <strong><font style="color:blue">{{ clientefs.c1_cell }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>EMAIL:</small>
+        <strong><font style="color:blue">{{ clientefs.c1_email }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black">
+      <td style="padding-left:10px">
+        <small>CONTACT:</small>
+        <strong><font style="color:blue">{{ clientefs.contact2 }}</font></strong>
+      </td>
+      <td style="width:300px">
+        &nbsp;
+      </td>
+      <td>
+        <small>RELATIONSHIP:</small>
+        <strong><font style="color:blue">{{ clientefs.c2_relationship }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>HOME:</small>
+        <strong><font style="color:blue">{{ clientefs.c2_home }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>WORK:</small>
+        <strong><font style="color:blue">{{ clientefs.c2_work }}</font></strong>
+        <small>EXT:</small>
+        <strong><font style="color:blue">{{ clientefs.c2_ext }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>CELL:</small>
+        <strong><font style="color:blue">{{ clientefs.c2_cell }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>EMAIL:</small>
+        <strong><font style="color:blue">{{ clientefs.c2_email }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black">
+      <td style="padding-left:10px">
+        <small>CONTACT:</small>
+        <strong><font style="color:blue">{{ clientefs.contact3 }}</font></strong>
+      </td>
+      <td style="width:300px">
+        &nbsp;
+      </td>
+      <td>
+        <small>RELATIONSHIP:</small>
+        <strong><font style="color:blue">{{ clientefs.c3_relationship }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>HOME:</small>
+        <strong><font style="color:blue">{{ clientefs.c3_home }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>WORK:</small>
+        <strong><font style="color:blue">{{ clientefs.c3_work }}</font></strong>
+        <small>EXT:</small>
+        <strong><font style="color:blue">{{ clientefs.c3_ext }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>CELL:</small>
+        <strong><font style="color:blue">{{ clientefs.c3_cell }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>EMAIL:</small>
+        <strong><font style="color:blue">{{ clientefs.c3_email }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black">
+      <td style="padding-left:10px">
+        <small>AGENCY CONTACT:</small>
+        <strong><font style="color:blue">{{ clientefs.agency_contact1 }}</font></strong>
+      </td>
+      <td style="width:300px">
+        &nbsp;
+      </td>
+      <td>
+        <small>RELATIONSHIP:</small>
+        <strong><font style="color:blue">{{ clientefs.ac1_relationship }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black">
+      <td style="padding-left:10px">
+        <small>ADDRESS:</small>
+        <strong><font style="color:blue">{{ clientefs.ac1_address }}</font></strong>
+      </td>
+      <td>
+        <small>CITY:</small>
+        <strong><font style="color:blue">{{ clientefs.ac1_city }}</font></strong>
+      </td>
+      <td>
+        <small>STATE:</small>
+        <strong><font style="color:blue">{{ clientefs.ac1_state }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>ZIP CODE:</small>
+        <strong><font style="color:blue">{{ clientefs.ac1_zip }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>HOME:</small>
+        <strong><font style="color:blue">{{ clientefs.ac1_home }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>WORK:</small>
+        <strong><font style="color:blue">{{ clientefs.ac1_work }}</font></strong>
+        <small>EXT:</small>
+        <strong><font style="color:blue">{{ clientefs.ac1_ext }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>CELL:</small>
+        <strong><font style="color:blue">{{ clientefs.ac1_cell }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>EMAIL:</small>
+        <strong><font style="color:blue">{{ clientefs.ac1_email }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black">
+      <td style="padding-left:10px">
+        <small>CONTACT:</small>
+        <strong><font style="color:blue">{{ clientefs.contact4 }}</font></strong>
+      </td>
+      <td style="width:300px">
+        &nbsp;
+      </td>
+      <td>
+        <small>RELATIONSHIP:</small>
+        <strong><font style="color:blue">{{ clientefs.c4_relationship }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>HOME:</small>
+        <strong><font style="color:blue">{{ clientefs.c4_home }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>WORK:</small>
+        <strong><font style="color:blue">{{ clientefs.c4_work }}</font></strong>
+        <small>EXT:</small>
+        <strong><font style="color:blue">{{ clientefs.c4_ext }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>CELL:</small>
+        <strong><font style="color:blue">{{ clientefs.c4_cell }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>EMAIL:</small>
+        <strong><font style="color:blue">{{ clientefs.c4_email }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black">
+      <td style="padding-left:10px">
+        <small>AGENCY CONTACT:</small>
+        <strong><font style="color:blue">{{ clientefs.agency_contact2 }}</font></strong>
+      </td>
+      <td style="width:300px">
+        &nbsp;
+      </td>
+      <td>
+        <small>RELATIONSHIP:</small>
+        <strong><font style="color:blue">{{ clientefs.ac2_relationship }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black">
+      <td style="padding-left:10px">
+        <small>ADDRESS:</small>
+        <strong><font style="color:blue">{{ clientefs.ac2_address }}</font></strong>
+      </td>
+      <td>
+        <small>CITY:</small>
+        <strong><font style="color:blue">{{ clientefs.ac2_city }}</font></strong>
+      </td>
+      <td>
+        <small>STATE:</small>
+        <strong><font style="color:blue">{{ clientefs.ac2_state }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>ZIP CODE:</small>
+        <strong><font style="color:blue">{{ clientefs.ac2_zip }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>HOME:</small>
+        <strong><font style="color:blue">{{ clientefs.ac2_home }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>WORK:</small>
+        <strong><font style="color:blue">{{ clientefs.ac2_work }}</font></strong>
+        <small>EXT:</small>
+        <strong><font style="color:blue">{{ clientefs.ac2_ext }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>CELL:</small>
+        <strong><font style="color:blue">{{ clientefs.ac2_cell }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>EMAIL:</small>
+        <strong><font style="color:blue">{{ clientefs.ac2_email }}</font></strong>
+      </td>
+    </tr>
+  </table>
+  <br/><br/>
+  <table style="width:1200px">
+    <tr>
+      <th style="width:400px; text-align:left">
+        <strong>Date Reviewed: {{ clientefs.date_reviewed }} </strong><br/>
+        <strong>Last Updated By: {{ clientefs.update_first_name }} {{ clientefs.update_last_name }}</strong>
+      </th>
+      <th style="width:600px; text-align:left"><h3>EMERGENCY FACT SHEET </h3></th>
+      <th style="width:200px; text-align:right">
+        Page <strong>2</strong> of <strong>2</strong>
+        <a href="{% url 'clients:client_update' pk=clientefs.id %}">
+          <button type="button" class="btn btn-danger">Edit EFS</button>
+        </a>
+      </th>
+    </tr>
+  </table>
+  <table style="width:1200px">
+    <tr>
+      <td style="width:400px; border-left:2px solid black; border-top:2px solid black; border-bottom:2px solid black; padding-left:10px">
+        <small>NAME:</small>
+        <strong><font style="color:blue">{{ clientefs.first_name }}</font></strong>
+      </td>
+      <td style="width:400px; border-top:2px solid black; border-bottom:2px solid black">
+        <strong><font style="color:blue">{{ clientefs.last_name }}</font></strong>
+      </td>
+      <td style="width:400px; border:2px solid black; padding-left:10px">
+        <small>NICKNAME:</small>
+        <strong><font style="color:blue">{{ clientefs.nickname }}</font></strong>
+      </td>
+    </tr>
+    <tr>
+      <td style="border-left:2px solid black; padding-left:10px">
+        <small>PHYSICIANS NAME:</small>
+        <strong><font style="color:blue">{{ clientefs.physician_first_name }}</font></strong>
+      </td>
+      <td>
+        <strong><font style="color:blue">{{ clientefs.physician_last_name }}</font></strong>
+      </td>
+      <td style="border-right:2px solid black">
+      </td>
+    </tr>
+    <tr>
+      <td style="border-left:2px solid black; padding-left:10px">
+        <small>ADDRESS:</small>
+        <strong><font style="color:blue">{{ clientefs.p_address }}</font></strong>
+      </td>
+      <td>
+        <small>CITY:</small>
+        <strong><font style="color:blue">{{ clientefs.p_city }}</font></strong>
+      </td>
+      <td style="border-right:2px solid black">
+        <small>STATE:</small>
+        <strong><font style="color:blue">{{ clientefs.p_state }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>ZIP CODE:</small>
+        <strong><font style="color:blue">{{ clientefs.p_zip }}</font></strong>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" style="border-left:2px solid black; border-right:2px solid black; padding-left:10px">
+        <small>PHONE:</small>
+        <strong><font style="color:blue">{{ clientefs.p_phone }}</font></strong>
+        <small>EXT:</small>
+        <strong><font style="color:blue">{{ clientefs.p_phone_ext }}</font></strong>
+        &nbsp; &nbsp; &nbsp;
+        <small>FAX:</small>
+        <strong><font style="color:blue">{{ clientefs.p_fax }}</font></strong>
+        <small>EXT:</small>
+        <strong><font style="color:blue">{{ clientefs.p_fax_ext }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>INSURANCE:</small>
+        <strong><font style="color:blue">{{ clientefs.insurance }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>ABILITY TO PROTECT SELF WITHOUT ASSISTANCE:</small>
+        <strong><font style="color:blue">{% if clientefs.can_protect_self %} YES {% else %} NO {% endif %}</strong>
+      </td>
+    </tr>
+    <tr style="border:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>SIGNIFICANT BEHAVIOR CHARACTERISTICS:</small>
+        <strong><font style="color:blue">{{ clientefs.behavior_characteristics }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>LIKELY RESPONSE TO SEARCH EFFORTS:</small>
+        <strong><font style="color:blue">{{ clientefs.response_to_search }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>PATTERN OF MOVEMENT IF LOST PREVIOUSLY:</small>
+        <strong><font style="color:blue">{{ clientefs.pattern_of_movement }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>PLACES FREQUENTED:</small>
+        <strong><font style="color:blue">{{ clientefs.places_frequented }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>RELEVANT CAPABILITIES, LIMITATIONS, AND PREFERENCES:</small>
+        <strong><font style="color:blue">{{ clientefs.capabilities_limitations }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border:2px solid black">
+      <td colspan="3" style="padding-left:10px">
+        <small>PROBABLE DRESS:</small>
+        <strong><font style="color:blue">{{ clientefs.probable_dress }}</font></strong>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black">
+      <td colspan="2" style="padding-left:10px">
+        <small>WHERE AND WHEN THE INDIVIDUAL WAS LAST SEEN:</small>
+      </td>
+      <td colspan="1">
+        <small>DATE/TIME:</small>
+      </td>
+    </tr>
+    <tr style="border-left:2px solid black; border-right:2px solid black">
+      <td colspan="2" style="padding-left:10px">
+        <strong><font style="color:blue">{{ clientefs.last_seen }}</font></strong>
+      </td>
+      <td colspan="1">
+        <strong><font style="color:blue">{{ clientefs.last_seen_date }}</font></strong>
+      </td>
+    </tr>
+  </table>
+  <table style="width:1200px; border:2px solid black">
+    <tr>
+      <td style="width:150px">
+      </td>
+      <td style="width:1050px; padding-left:200px">
+        <strong>RELEVANT EMERGENCY MEDICAL INFORMATION</strong>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-left:10px">
+        <small>DIAGNOSIS:</small>
+      </td>
+      <td>
+        <strong><font style="color:blue">{{ clientefs.diagnosis|safe|linebreaksbr }}</font></strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        &nbsp;
+      </td>
+      <td>
+        &nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-left:10px">
+        <small>ALLERGIES:</small>
+      </td>
+      <td>
+        <strong><font style="color:red">{{ clientefs.allergies }}</font></strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        &nbsp;
+      </td>
+      <td>
+        &nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-left:10px">
+        <small>MEDICATIONS:</small>
+      </td>
+      <td>
+        <strong><font style="color:blue">{{ clientefs.medications|safe|linebreaksbr }}</font></strong>
+      </td>
+    </tr>
+  </table>
+  <br/><br/><br/>
+</div>
+
+{% endblock %}

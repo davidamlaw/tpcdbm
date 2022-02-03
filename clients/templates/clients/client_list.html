@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mycontent">
+  <h3>Price Center Clients:</h3>
+  <table>
+    <tr style="color:#666666">
+      <th style="padding-left:10px"><strong>FName</strong></th>
+      <th><strong>LName</strong></th>
+      <th><strong>Date Of Birth</strong></th>
+      <th><strong>Gaurdian</strong></th>
+      <th><strong>Gaurdian</strong></th>
+      <th><strong>Last Updated</strong></th>
+      <th><strong>Updated By</strong></th>
+    </tr>
+
+  {% for client in clientefs_list %}
+    {% if forloop.counter0|divisibleby:2 %}
+      <tr style="background:#dddddd">
+    {% else %}
+      <tr>
+    {% endif %}
+      <td style="padding-right:20px; padding-left:10px">
+        <a href="{% url 'clients:client_detail' pk=client.id %}" style="text-decoration:none">
+        <strong> {{ client.first_name }} </strong>
+        </a>
+      </td>
+      <td style="padding-right:20px">
+        <a href="{% url 'clients:client_detail' pk=client.id %}" style="text-decoration:none">
+        <strong> {{ client.last_name }} </strong>
+        </a>
+      </td>
+      <td style="padding-right:20px">
+        {{ client.dob }}
+      </td>
+      <td style="padding-right:20px">
+        {{ client.guardian1 }}
+      </td>
+      <td style="padding-right:20px">
+        {{ client.guardian2 }}
+      </td>
+      <td style="padding-right:20px">
+        <strong>{{ client.date_reviewed }}</strong>
+      </td>
+      <td style="padding-right:10px">{{ client.update_first_name }} {{ client.update_last_name }}</td>
+    </tr>
+  {% endfor %}
+  </table>
+
+{% endblock %}

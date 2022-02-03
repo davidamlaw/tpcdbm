@@ -1,0 +1,813 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <form method="POST">
+    {% csrf_token %}
+    <table style="width:1200px">
+      <tr>
+        <th style="width:400px; text-align:left">
+          <strong>Date Reviewed: {{ form.date_reviewed }}</strong><br/>
+          <strong>Last Updated By: {{ form.update_first_name.value }} {{ form.update_last_name.value }}</strong>
+          <!-- <input id="id_date_reviewed" type="hidden" name="date_reviewed"
+          value="{{ form.date_reviewed.value }}" required=""> -->
+          <input id="id_update_first_name" type="hidden" name="update_first_name"
+          value="{{ user.first_name }}" required="">
+          <input id="id_update_last_name" type="hidden" name="update_last_name"
+          value="{{ user.last_name }}" required="">
+        </th>
+        <th style="width:600px; text-align:left"><h3>EMERGENCY FACT SHEET <font style="color:red">(EDIT MODE)</font></h3></th>
+        <th style="width:200px; text-align:right">
+          Page <strong>1</strong> of <strong>2</strong>
+          <input type="submit" class="btn btn-danger" value="Save Updates">
+        </th>
+      </tr>
+    </table>
+    <table style="width:1200px">
+      <tr>
+        <td style="width:996px">
+          <table style="border:0px; background-color:#ffdddd">
+            <tr>
+              <td style="width:166px"></td>
+              <td style="width:166px"></td>
+              <td style="width:166px"></td>
+              <td style="width:166px"></td>
+              <td style="width:166px"></td>
+              <td style="width:166px"></td>
+            </tr>
+            <tr>
+              <td colspan="2" style="border-left:2px solid black; border-top:2px solid black; padding-left:10px">
+                <small>NAME:</small>
+                <input id="id_first_name" type="text" name="first_name"
+                value="{{ form.first_name.value }}" maxlength="64" size="10" required>
+              </td>
+              <td colspan="2" style="border-top:2px solid black;">
+                <input id="id_last_name" type="text" name="last_name"
+                value="{{ form.last_name.value }}" maxlength="64" size="10" required>
+              </td>
+              <td colspan="2" style="border:2px solid black; padding-left:10px">
+                <small>NICKNAME:</small>
+                <input id="id_nickname" type="text" name="nickname"
+                value="{{ form.nickname.value }}" maxlength="64" size="10">
+              </td>
+            </tr>
+            <tr style="border-left:2px solid black; border-right:2px solid black; border-top:2px solid black">
+              <td colspan="6" style="padding-left:10px">
+                <small>CURRENT ADDRESS:</small>
+              </td>
+            </tr>
+            <tr style="border-left:2px solid black; border-right:2px solid black;">
+              <td colspan="2" style="padding-left:10px">
+                {{ form.current_address }}
+              </td>
+              <td colspan="2">
+                <small>CITY:</small>
+                <input id="id_ca_city" type="text" name="ca_city"
+                value="{{ form.ca_city.value }}" maxlength="64" size="10">
+              </td>
+              <td colspan="2">
+                <small>STATE:</small>
+                <input id="id_ca_state" type="text" name="ca_state"
+                value="{{ form.ca_state.value }}" maxlength="2" size="1">
+                &nbsp; &nbsp; &nbsp; <small>ZIP CODE:</small>
+                <input id="id_ca_zip" type="text" name="ca_zip"
+                value="{{ form.ca_zip.value }}" maxlength="5" size="2">
+              </td>
+            </tr>
+            <tr style="border:2px solid black">
+              <td colspan="4" style="padding-left:10px">
+                <small>PHONE#:</small>
+                <input id="id_phone1" type="text" name="phone1"
+                value="{{ form.phone1.value }}" maxlength="14" size="6">
+                <small>EXT:</small>
+                <input id="id_ext1" type="text" name="ext1"
+                value="{{ form.ext1.value }}" maxlength="5" size="2">
+              </td>
+              <td colspan="2">
+                <small>PHONE#:</small>
+                <input id="id_phone2" type="text" name="phone2"
+                value="{{ form.phone2.value }}" maxlength="14" size="6">
+                <small>EXT:</small>
+                <input id="id_ext2" type="text" name="ext2"
+                value="{{ form.ext2.value }}" maxlength="5" size="2">
+              </td>
+            </tr>
+            <tr style="border-left:2px solid black; border-right:2px solid black; border-top:2px solid black">
+              <td colspan="6" style="padding-left:10px">
+                <small>PREVIOUS ADDRESS (If Different):</small>
+              </td>
+            </tr>
+            <tr style="border-left:2px solid black; border-right:2px solid black;">
+              <td colspan="2" style="padding-left:10px">
+                {{ form.previous_address }}
+              </td>
+              <td colspan="2">
+                <small>CITY:</small>
+                <input id="id_pa_city" type="text" name="pa_city"
+                value="{{ form.pa_city.value }}" maxlength="64" size="10">
+              </td>
+              <td colspan="2">
+                <small>STATE:</small>
+                <input id="id_pa_state" type="text" name="pa_state"
+                value="{{ form.pa_state.value }}" maxlength="2" size="1">
+                &nbsp; &nbsp; &nbsp; <small>ZIP CODE:</small>
+                <input id="id_pa_zip" type="text" name="pa_zip"
+                value="{{ form.pa_zip.value }}" maxlength="5" size="2">
+              </td>
+            </tr>
+            <tr style="border-left:2px solid black; border-right:2px solid black; border-top:2px solid black">
+              <td colspan="6" style="padding-left:10px">
+                <small>FAMILY ADDRESS (If Different):</small>
+              </td>
+            </tr>
+            <tr style="border-left:2px solid black; border-right:2px solid black;">
+              <td colspan="2" style="padding-left:10px">
+                {{ form.family_address }}
+              </td>
+              <td colspan="2">
+                <small>CITY:</small>
+                <input id="id_fa_city" type="text" name="fa_city"
+                value="{{ form.fa_city.value }}" maxlength="64" size="10">
+              </td>
+              <td colspan="2">
+                <small>STATE:</small>
+                <input id="id_fa_state" type="text" name="fa_state"
+                value="{{ form.fa_state.value }}" maxlength="2" size="1">
+                &nbsp; &nbsp; &nbsp; <small>ZIP CODE:</small>
+                <input id="id_fa_zip" type="text" name="fa_zip"
+                value="{{ form.fa_zip.value }}" maxlength="5" size="2">
+              </td>
+            </tr>
+            <tr>
+              <td colspan="1" style="border:2px solid black; padding-left:10px">
+                <small>GENDER:</small><br/>
+                <input id="id_gender" type="text" name="gender"
+                value="{{ form.gender.value }}" maxlength="32" size="3">
+              </td>
+              <td colspan="1" style="border:2px solid black; padding-left:10px">
+                <small>RACE:</small><br/>
+                <input id="id_race" type="text" name="race"
+                value="{{ form.race.value }}" maxlength="32" size="8">
+              </td>
+              <td colspan="1" style="border:2px solid black; padding-left:10px">
+                <small>DOB (YYYY-MM-DD):</small><br/>
+                <input id="id_dob" type="text" name="dob"
+                value="{{ form.dob.value }}" maxlength="10" size="6">
+              </td>
+              <td colspan="1" style="border:2px solid black; padding-left:10px">
+                <small>AGE:</small><br/>
+                <input id="id_age" type="text" name="age"
+                value="{{ form.age.value }}" maxlength="3" size="1">
+              </td>
+              <td colspan="2" style="border:2px solid black; padding-left:10px">
+                <small>HEIGHT:</small><br/>
+                <input id="id_height_ft" type="text" name="height_ft"
+                value="{{ form.height_ft.value }}" maxlength="2" size="1">
+                <small>FT</small>
+                <input id="id_height_in" type="text" name="height_in"
+                value="{{ form.height_in.value }}" maxlength="2" size="1">
+                <small>IN</small>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td style="width:204px; text-align:center; border:2px solid black">
+          <!-- {{ form.photo }} -->
+        </td>
+      </tr>
+    </table>
+    <table style="width:1200px; border-colapse:colapse; background-color:#ffdddd">
+      <tr>
+        <td style="width:150px; border:2px solid black; padding-left:10px">
+          <small>WEIGHT:</small><br/>
+          <input id="id_weight" type="text" name="weight"
+          value="{{ form.weight.value }}" maxlength="4" size="1">
+          <small>LBS</small>
+        </td>
+        <td style="width:200px; border:2px solid black; padding-left:10px">
+          <small>BUILD:</small><br/>
+          <input id="id_build" type="text" name="build"
+          value="{{ form.build.value }}" maxlength="32" size="8">
+        </td>
+        <td style="width:250px; border:2px solid black; padding-left:10px">
+          <small>HAIR:</small>
+          <input id="id_hair" type="text" name="hair"
+          value="{{ form.hair.value }}" maxlength="32" size="2"><br/>
+          <small>EYE COLOR:</small>
+          <input id="id_eye_color" type="text" name="eye_color"
+          value="{{ form.eye_color.value }}" maxlength="32" size="2">
+        </td>
+        <td style="width:350px; border:2px solid black; padding-left:10px">
+          <small>RESUSCITATION STATUS:</small><br/>
+          <input id="id_resuscitation_status" type="text" name="resuscitation_status"
+          value="{{ form.resuscitation_status.value }}" maxlength="64" size="15">
+        </td>
+        <td style="width:250px; border:2px solid black; text-align:center">
+          <small>PHOTO DATE (YYYY-MM-DD):</small><br/>
+          <input id="id_photo_date" type="text" name="photo_date"
+          value="{{ form.photo_date.value }}" maxlength="12" size="6">
+        </td>
+      </tr>
+      <tr style="border:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>LEGAL COMPETENCY STATUS:</small>
+          {{ form.legal_competency_status }}
+        </td>
+        <td colspan="2" style="padding-left:10px">
+          <small>LANGUAGE/COMMUNICATION</small>
+          <input id="id_language" type="text" name="language"
+          value="{{ form.language.value }}" maxlength="64" size="15">
+        </td>
+      </tr>
+      <tr style="border:2px solid black">
+        <td colspan="5" style="padding-left:10px">
+          <small>IDENTIFYING MARKS:</small>
+          <input id="id_identifying_marks" type="text" name="identifying_marks"
+          value="{{ form.identifying_marks.value }}" maxlength="128" size="48">
+        </td>
+      </tr>
+    </table>
+    <table style="width:1200px; background-color:#ffdddd">
+      <tr style="border-left:2px solid black; border-right:2px solid black">
+        <td style="padding-left:10px">
+          <small>GAURDIAN:</small>
+          {{ form.guardian1 }}
+        </td>
+        <td style="width:300px">
+          &nbsp;
+        </td>
+        <td>
+          <small>RELATIONSHIP:</small>
+          <input id="id_g1_relationship" type="text" name="g1_relationship"
+          value="{{ form.g1_relationship.value }}" maxlength="64" size="8">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black">
+        <td style="padding-left:10px">
+          <small>ADDRESS:</small>
+          {{ form.g1_address }}
+        </td>
+        <td>
+          <small>CITY:</small>
+          <input id="id_g1_city" type="text" name="g1_city"
+          value="{{ form.g1_city.value }}" maxlength="64" size="10">
+        </td>
+        <td>
+          <small>STATE:</small>
+          <input id="id_g1_state" type="text" name="g1_state"
+          value="{{ form.g1_state.value }}" maxlength="2" size="1">
+          &nbsp; &nbsp; &nbsp;
+          <small>ZIP CODE:</small>
+          <input id="id_g1_zip" type="text" name="g1_zip"
+          value="{{ form.g1_zip.value }}" maxlength="5" size="2">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>HOME:</small>
+          <input id="id_g1_home" type="text" name="g1_home"
+          value="{{ form.g1_home.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>WORK:</small>
+          <input id="id_g1_work" type="text" name="g1_work"
+          value="{{ form.g1_work.value }}" maxlength="14" size="6">
+          <small>EXT:</small>
+          <input id="id_g1_ext" type="text" name="g1_ext"
+          value="{{ form.g1_ext.value }}" maxlength="5" size="2">
+          &nbsp; &nbsp; &nbsp;
+          <small>CELL:</small>
+          <input id="id_g1_cell" type="text" name="g1_cell"
+          value="{{ form.g1_cell.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>EMAIL:</small>
+          <input id="id_g1_email" type="email" name="g1_email"
+          value="{{ form.g1_email.value }}" maxlength="128" size="15">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black">
+        <td style="padding-left:10px">
+          <small>GAURDIAN:</small>
+          {{ form.guardian2 }}
+        </td>
+        <td style="width:300px">
+          &nbsp;
+        </td>
+        <td>
+          <small>RELATIONSHIP:</small>
+          <input id="id_g2_relationship" type="text" name="g2_relationship"
+          value="{{ form.g2_relationship.value }}" maxlength="64" size="8">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black">
+        <td style="padding-left:10px">
+          <small>ADDRESS:</small>
+          {{ form.g2_address }}
+        </td>
+        <td>
+          <small>CITY:</small>
+          <input id="id_g2_city" type="text" name="g2_city"
+          value="{{ form.g2_city.value }}" maxlength="64" size="10">
+        </td>
+        <td>
+          <small>STATE:</small>
+          <input id="id_g2_state" type="text" name="g2_state"
+          value="{{ form.g2_state.value }}" maxlength="2" size="1">
+          &nbsp; &nbsp; &nbsp;
+          <small>ZIP CODE:</small>
+          <input id="id_g2_zip" type="text" name="g2_zip"
+          value="{{ form.g2_zip.value }}" maxlength="5" size="2">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>HOME:</small>
+          <input id="id_g2_home" type="text" name="g2_home"
+          value="{{ form.g2_home.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>WORK:</small>
+          <input id="id_g2_work" type="text" name="g2_work"
+          value="{{ form.g2_work.value }}" maxlength="14" size="6">
+          <small>EXT:</small>
+          <input id="id_g2_ext" type="text" name="g2_ext"
+          value="{{ form.g2_ext.value }}" maxlength="5" size="2">
+          &nbsp; &nbsp; &nbsp;
+          <small>CELL:</small>
+          <input id="id_g2_cell" type="text" name="g2_cell"
+          value="{{ form.g2_cell.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>EMAIL:</small>
+          <input id="id_g2_email" type="email" name="g2_email"
+          value="{{ form.g2_email.value }}" maxlength="128" size="15">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black">
+        <td style="padding-left:10px">
+          <small>CONTACT:</small>
+          {{ form.contact1 }}
+        </td>
+        <td style="width:300px">
+          &nbsp;
+        </td>
+        <td>
+          <small>RELATIONSHIP:</small>
+          <input id="id_c1_relationship" type="text" name="c1_relationship"
+          value="{{ form.c1_relationship.value }}" maxlength="64" size="8">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>HOME:</small>
+          <input id="id_c1_home" type="text" name="c1_home"
+          value="{{ form.c1_home.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>WORK:</small>
+          <input id="id_c1_work" type="text" name="c1_work"
+          value="{{ form.c1_work.value }}" maxlength="14" size="6">
+          <small>EXT:</small>
+          <input id="id_c1_ext" type="text" name="c1_ext"
+          value="{{ form.c1_ext.value }}" maxlength="5" size="2">
+          &nbsp; &nbsp; &nbsp;
+          <small>CELL:</small>
+          <input id="id_c1_cell" type="text" name="c1_cell"
+          value="{{ form.c1_cell.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>EMAIL:</small>
+          <input id="id_c1_email" type="text" name="c1_email"
+          value="{{ form.c1_email.value }}" maxlength="128" size="15">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black">
+        <td style="padding-left:10px">
+          <small>CONTACT:</small>
+          {{ form.contact2 }}
+        </td>
+        <td style="width:300px">
+          &nbsp;
+        </td>
+        <td>
+          <small>RELATIONSHIP:</small>
+          <input id="id_c2_relationship" type="text" name="c2_relationship"
+          value="{{ form.c2_relationship.value }}" maxlength="64" size="8">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>HOME:</small>
+          <input id="id_c2_home" type="text" name="c2_home"
+          value="{{ form.c2_home.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>WORK:</small>
+          <input id="id_c2_work" type="text" name="c2_work"
+          value="{{ form.c2_work.value }}" maxlength="14" size="6">
+          <small>EXT:</small>
+          <input id="id_c2_ext" type="text" name="c2_ext"
+          value="{{ form.c2_ext.value }}" maxlength="5" size="2">
+          &nbsp; &nbsp; &nbsp;
+          <small>CELL:</small>
+          <input id="id_c2_cell" type="text" name="c2_cell"
+          value="{{ form.c2_cell.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>EMAIL:</small>
+          <input id="id_c2_email" type="text" name="c2_email"
+          value="{{ form.c2_email.value }}" maxlength="128" size="15">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black">
+        <td style="padding-left:10px">
+          <small>CONTACT:</small>
+          {{ form.contact3 }}
+        </td>
+        <td style="width:300px">
+          &nbsp;
+        </td>
+        <td>
+          <small>RELATIONSHIP:</small>
+          <input id="id_c3_relationship" type="text" name="c3_relationship"
+          value="{{ form.c3_relationship.value }}" maxlength="64" size="8">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>HOME:</small>
+          <input id="id_c3_home" type="text" name="c3_home"
+          value="{{ form.c3_home.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>WORK:</small>
+          <input id="id_c3_work" type="text" name="c3_work"
+          value="{{ form.c3_work.value }}" maxlength="14" size="6">
+          <small>EXT:</small>
+          <input id="id_c3_ext" type="text" name="c3_ext"
+          value="{{ form.c3_ext.value }}" maxlength="5" size="2">
+          &nbsp; &nbsp; &nbsp;
+          <small>CELL:</small>
+          <input id="id_c3_cell" type="text" name="c3_cell"
+          value="{{ form.c3_cell.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>EMAIL:</small>
+          <input id="id_c3_email" type="text" name="c3_email"
+          value="{{ form.c3_email.value }}" maxlength="128" size="15">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black">
+        <td style="padding-left:10px">
+          <small>AGENCY CONTACT:</small>
+          {{ form.agency_contact1 }}
+        </td>
+        <td style="width:300px">
+          &nbsp;
+        </td>
+        <td>
+          <small>RELATIONSHIP:</small>
+          <input id="id_ac1_relationship" type="text" name="ac1_relationship"
+          value="{{ form.ac1_relationship.value }}" maxlength="64" size="8">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black">
+        <td style="padding-left:10px">
+          <small>ADDRESS:</small>
+          {{ form.ac1_address }}
+        </td>
+        <td>
+          <small>CITY:</small>
+          <input id="id_ac1_city" type="text" name="ac1_city"
+          value="{{ form.ac1_city.value }}" maxlength="64" size="10">
+        </td>
+        <td>
+          <small>STATE:</small>
+          <input id="id_ac1_state" type="text" name="ac1_state"
+          value="{{ form.ac1_state.value }}" maxlength="2" size="1">
+          &nbsp; &nbsp; &nbsp;
+          <small>ZIP CODE:</small>
+          <input id="id_ac1_zip" type="text" name="ac1_zip"
+          value="{{ form.ac1_zip.value }}" maxlength="5" size="2">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>HOME:</small>
+          <input id="id_ac1_home" type="text" name="ac1_home"
+          value="{{ form.ac1_home.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>WORK:</small>
+          <input id="id_ac1_work" type="text" name="ac1_work"
+          value="{{ form.ac1_work.value }}" maxlength="14" size="6">
+          <small>EXT:</small>
+          <input id="id_ac1_ext" type="text" name="ac1_ext"
+          value="{{ form.ac1_ext.value }}" maxlength="5" size="2">
+          &nbsp; &nbsp; &nbsp;
+          <small>CELL:</small>
+          <input id="id_ac1_cell" type="text" name="ac1_cell"
+          value="{{ form.ac1_cell.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>EMAIL:</small>
+          <input id="id_ac1_email" type="text" name="ac1_email"
+          value="{{ form.ac1_email.value }}" maxlength="128" size="15">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black">
+        <td style="padding-left:10px">
+          <small>CONTACT:</small>
+          {{ form.contact4 }}
+        </td>
+        <td style="width:300px">
+          &nbsp;
+        </td>
+        <td>
+          <small>RELATIONSHIP:</small>
+          <input id="id_c4_relationship" type="text" name="c4_relationship"
+          value="{{ form.c4_relationship.value }}" maxlength="64" size="8">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>HOME:</small>
+          <input id="id_c4_home" type="text" name="c4_home"
+          value="{{ form.c4_home.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>WORK:</small>
+          <input id="id_c4_work" type="text" name="c4_work"
+          value="{{ form.c4_work.value }}" maxlength="14" size="6">
+          <small>EXT:</small>
+          <input id="id_c4_ext" type="text" name="c4_ext"
+          value="{{ form.c4_ext.value }}" maxlength="5" size="2">
+          &nbsp; &nbsp; &nbsp;
+          <small>CELL:</small>
+          <input id="id_c4_cell" type="text" name="c4_cell"
+          value="{{ form.c4_cell.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>EMAIL:</small>
+          <input id="id_c4_email" type="text" name="c4_email"
+          value="{{ form.c4_email.value }}" maxlength="128" size="15">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black">
+        <td style="padding-left:10px">
+          <small>AGENCY CONTACT:</small>
+          {{ form.agency_contact2 }}
+        </td>
+        <td style="width:300px">
+          &nbsp;
+        </td>
+        <td>
+          <small>RELATIONSHIP:</small>
+          <input id="id_ac2_relationship" type="text" name="ac2_relationship"
+          value="{{ form.ac2_relationship.value }}" maxlength="64" size="8">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black">
+        <td style="padding-left:10px">
+          <small>ADDRESS:</small>
+          {{ form.ac2_address }}
+        </td>
+        <td>
+          <small>CITY:</small>
+          <input id="id_ac2_city" type="text" name="ac2_city"
+          value="{{ form.ac2_city.value }}" maxlength="64" size="10">
+        </td>
+        <td>
+          <small>STATE:</small>
+          <input id="id_ac2_state" type="text" name="ac2_state"
+          value="{{ form.ac2_state.value }}" maxlength="2" size="1">
+          &nbsp; &nbsp; &nbsp;
+          <small>ZIP CODE:</small>
+          <input id="id_ac2_zip" type="text" name="ac2_zip"
+          value="{{ form.ac2_zip.value }}" maxlength="5" size="2">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>HOME:</small>
+          <input id="id_ac2_home" type="text" name="ac2_home"
+          value="{{ form.ac2_home.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>WORK:</small>
+          <input id="id_ac2_work" type="text" name="ac2_work"
+          value="{{ form.ac2_work.value }}" maxlength="14" size="6">
+          <small>EXT:</small>
+          <input id="id_ac2_ext" type="text" name="ac2_ext"
+          value="{{ form.ac2_ext.value }}" maxlength="5" size="2">
+          &nbsp; &nbsp; &nbsp;
+          <small>CELL:</small>
+          <input id="id_ac2_cell" type="text" name="ac2_cell"
+          value="{{ form.ac2_cell.value }}" maxlength="14" size="6">
+          &nbsp; &nbsp; &nbsp;
+          <small>EMAIL:</small>
+          <input id="id_ac2_email" type="text" name="ac2_email"
+          value="{{ form.ac2_email.value }}" maxlength="128" size="15">
+        </td>
+      </tr>
+    </table>
+    <br/><br/>
+    <table style="width:1200px">
+      <tr>
+        <th style="width:400px; text-align:left">
+          <strong>Date Reviewed: {{ form.date_reviewed.value }} </strong><br/>
+          <strong>Last Updated By: {{ form.update_first_name.value }} {{ form.update_last_name.value }}</strong>
+        </th>
+        <th style="width:600px; text-align:left"><h3>EMERGENCY FACT SHEET </h3></th>
+        <th style="width:200px; text-align:right">
+          Page <strong>2</strong> of <strong>2</strong>
+          <input type="submit" class="btn btn-danger" value="Save Updates">
+        </th>
+      </tr>
+    </table>
+    <table style="width:1200px; background-color:#ffdddd">
+      <tr>
+        <td style="width:400px; border-left:2px solid black; border-top:2px solid black; border-bottom:2px solid black; padding-left:10px">
+          <small>NAME:</small>
+          <strong><font style="color:blue">{{ form.first_name.value }}</font></strong>
+        </td>
+        <td style="width:400px; border-top:2px solid black; border-bottom:2px solid black">
+          <strong><font style="color:blue">{{ form.last_name.value }}</font></strong>
+        </td>
+        <td style="width:400px; border:2px solid black; padding-left:10px">
+          <small>NICKNAME:</small>
+          <strong><font style="color:blue">{{ form.nickname.value }}</font></strong>
+        </td>
+      </tr>
+      <tr>
+        <td style="border-left:2px solid black; padding-left:10px">
+          <small>PHYSICIANS NAME (FIRST NAME):</small><br/>
+          {{ form.physician_first_name }}
+        </td>
+        <td>
+          <small>PHYSICIANS NAME (LAST NAME):</small><br/>
+          {{ form.physician_last_name }}
+        </td>
+        <td style="border-right:2px solid black">
+        </td>
+      </tr>
+      <tr>
+        <td style="border-left:2px solid black; padding-left:10px">
+          <small>ADDRESS:</small>
+          {{ form.p_address }}
+        </td>
+        <td>
+          <small>CITY:</small>
+          <input id="id_p_city" type="text" name="p_city"
+          value="{{ form.p_city.value }}" maxlength="64" size="10">
+        </td>
+        <td style="border-right:2px solid black">
+          <small>STATE:</small>
+          <input id="id_p_state" type="text" name="p_state"
+          value="{{ form.p_state.value }}" maxlength="2" size="1">
+          &nbsp; &nbsp; &nbsp;
+          <small>ZIP CODE:</small>
+          <input id="id_p_zip" type="text" name="p_zip"
+          value="{{ form.p_zip.value }}" maxlength="5" size="2">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" style="border-left:2px solid black; border-right:2px solid black; padding-left:10px">
+          <small>PHONE:</small>
+          <input id="id_p_phone" type="text" name="p_phone"
+          value="{{ form.p_phone.value }}" maxlength="14" size="6">
+          <small>EXT:</small>
+          <input id="id_p_phone_ext" type="text" name="p_phone_ext"
+          value="{{ form.p_phone_ext.value }}" maxlength="5" size="2">
+          &nbsp; &nbsp; &nbsp;
+          <small>FAX:</small>
+          <input id="id_p_fax" type="text" name="p_fax"
+          value="{{ form.p_fax.value }}" maxlength="14" size="6">
+          <small>EXT:</small>
+          <input id="id_p_fax_ext" type="text" name="p_fax_ext"
+          value="{{ form.p_fax_ext.value }}" maxlength="5" size="2">
+        </td>
+      </tr>
+      <tr style="border:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>INSURANCE:</small>
+          <input id="id_insurance" type="text" name="insurance"
+          value="{{ form.insurance.value }}" maxlength="128" size="48">
+        </td>
+      </tr>
+      <tr style="border:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>ABILITY TO PROTECT SELF WITHOUT ASSISTANCE (CHECK FOR YES):</small>
+          {{ form.can_protect_self }}
+        </td>
+      </tr>
+      <tr style="border:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>SIGNIFICANT BEHAVIOR CHARACTERISTICS:</small>
+          <input id="id_behavior_characteristics" type="text" name="behavior_characteristics"
+          value="{{ form.behavior_characteristics.value }}" maxlength="128" size="48">
+        </td>
+      </tr>
+      <tr style="border:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>LIKELY RESPONSE TO SEARCH EFFORTS:</small>
+          <input id="id_response_to_search" type="text" name="response_to_search"
+          value="{{ form.response_to_search.value }}" maxlength="128" size="48">
+        </td>
+      </tr>
+      <tr style="border:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>PATTERN OF MOVEMENT IF LOST PREVIOUSLY:</small>
+          <input id="id_pattern_of_movement" type="text" name="pattern_of_movement"
+          value="{{ form.pattern_of_movement.value }}" maxlength="128" size="48">
+        </td>
+      </tr>
+      <tr style="border:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>PLACES FREQUENTED:</small>
+          <input id="id_places_frequented" type="text" name="places_frequented"
+          value="{{ form.places_frequented.value }}" maxlength="128" size="48">
+        </td>
+      </tr>
+      <tr style="border:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>RELEVANT CAPABILITIES, LIMITATIONS, AND PREFERENCES:</small>
+          <input id="id_capabilities_limitations" type="text" name="capabilities_limitations"
+          value="{{ form.capabilities_limitations.value }}" maxlength="128" size="48">
+        </td>
+      </tr>
+      <tr style="border:2px solid black">
+        <td colspan="3" style="padding-left:10px">
+          <small>PROBABLE DRESS:</small>
+          <input id="id_probable_dress" type="text" name="probable_dress"
+          value="{{ form.probable_dress.value }}" maxlength="128" size="48">
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black">
+        <td colspan="2" style="padding-left:10px">
+          <small>WHERE AND WHEN THE INDIVIDUAL WAS LAST SEEN:</small>
+        </td>
+        <td colspan="1">
+          <small>DATE/TIME (YYYY-MM-DD HH:MM):</small>
+        </td>
+      </tr>
+      <tr style="border-left:2px solid black; border-right:2px solid black">
+        <td colspan="2" style="padding-left:10px">
+          <input id="id_last_seen" type="text" name="last_seen"
+          value="{{ form.last_seen.value }}" maxlength="128" size="48">
+        </td>
+        <td colspan="1">
+          {{ form.last_seen_date }}
+        </td>
+      </tr>
+    </table>
+    <table style="width:1200px; border:2px solid black; background-color:#ffdddd">
+      <tr>
+        <td style="width:150px">
+        </td>
+        <td style="width:1050px; padding-left:200px">
+          <strong>RELEVANT EMERGENCY MEDICAL INFORMATION</strong>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-left:10px">
+          <small>DIAGNOSIS:</small>
+        </td>
+        <td>
+          {{ form.diagnosis }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          &nbsp;
+        </td>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-left:10px">
+          <small>ALLERGIES:</small>
+        </td>
+        <td>
+          <input id="id_allergies" type="text" name="allergies"
+          value="{{ form.allergies.value }}" maxlength="128" size="48">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          &nbsp;
+        </td>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-left:10px">
+          <small>MEDICATIONS:</small>
+        </td>
+        <td>
+          {{ form.medications }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          &nbsp;
+        </td>
+        <td style="text-align:right">
+          <input type="submit" class="btn btn-danger" value="Save Updates">
+        </td>
+      </tr>
+    </table>
+    <br/><br/><br/>
+  </form>
+</div>
+
+{% endblock %}
