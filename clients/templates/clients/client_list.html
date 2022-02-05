@@ -13,9 +13,10 @@
       <th><strong>Gaurdian</strong></th>
       <th><strong>Last Updated</strong></th>
       <th><strong>Updated By</strong></th>
+      <th><strong>Edit/View</strong></th>
     </tr>
 
-  {% for client in clientefs_list %}
+  {% for client in clientefs_list.all|dictsort:"first_name" %}
     {% if forloop.counter0|divisibleby:2 %}
       <tr style="background:#dddddd">
     {% else %}
@@ -43,7 +44,13 @@
       <td style="padding-right:20px">
         <strong>{{ client.date_reviewed }}</strong>
       </td>
-      <td style="padding-right:10px">{{ client.update_first_name }} {{ client.update_last_name }}</td>
+      <td style="padding-right:20px">{{ client.update_first_name }} {{ client.update_last_name }}
+      </td>
+      <td>
+        <a href="{% url 'clients:client_detail' pk=client.id %}"><button class="btn btn-sm btn-outline-primary"><strong>View</strong></button></a>
+        <a href="{% url 'clients:client_update' pk=client.id %}"><button class="btn btn-sm btn-outline-danger"><strong>Update</strong></button></a>
+      </td>
+
     </tr>
   {% endfor %}
   </table>

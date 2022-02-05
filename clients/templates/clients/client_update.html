@@ -10,8 +10,6 @@
         <th style="width:400px; text-align:left">
           <strong>Date Reviewed: {{ form.date_reviewed }}</strong><br/>
           <strong>Last Updated By: {{ form.update_first_name.value }} {{ form.update_last_name.value }}</strong>
-          <!-- <input id="id_date_reviewed" type="hidden" name="date_reviewed"
-          value="{{ form.date_reviewed.value }}" required=""> -->
           <input id="id_update_first_name" type="hidden" name="update_first_name"
           value="{{ user.first_name }}" required="">
           <input id="id_update_last_name" type="hidden" name="update_last_name"
@@ -153,28 +151,29 @@
               <td colspan="1" style="border:2px solid black; padding-left:10px">
                 <small>DOB (YYYY-MM-DD):</small><br/>
                 <input id="id_dob" type="text" name="dob"
-                value="{{ form.dob.value }}" maxlength="10" size="6">
+                {% if form.dob.value != None %} value="{{ form.dob.value|date:"Y-m-d" }}" {% endif %} maxlength="32" size="6">
               </td>
               <td colspan="1" style="border:2px solid black; padding-left:10px">
                 <small>AGE:</small><br/>
                 <input id="id_age" type="text" name="age"
-                value="{{ form.age.value }}" maxlength="3" size="1">
+                {% if form.age.value != None %} value="{{ form.age.value }}" {% endif %} maxlength="3" size="1">
               </td>
               <td colspan="2" style="border:2px solid black; padding-left:10px">
                 <small>HEIGHT:</small><br/>
                 <input id="id_height_ft" type="text" name="height_ft"
-                value="{{ form.height_ft.value }}" maxlength="2" size="1">
+                {% if form.height_ft.value != None %} value="{{ form.height_ft.value }}" {% endif %} maxlength="2" size="1">
                 <small>FT</small>
                 <input id="id_height_in" type="text" name="height_in"
-                value="{{ form.height_in.value }}" maxlength="2" size="1">
+                {% if form.height_in.value != None %} value="{{ form.height_in.value }}" {% endif %} maxlength="2" size="1">
                 <small>IN</small>
               </td>
             </tr>
           </table>
         </td>
         <td style="width:204px; text-align:center; border:2px solid black">
-          <!-- {{ form.photo }} -->
         </td>
+        Photo Upload<br/>
+        Not Available
       </tr>
     </table>
     <table style="width:1200px; border-colapse:colapse; background-color:#ffdddd">
@@ -182,7 +181,7 @@
         <td style="width:150px; border:2px solid black; padding-left:10px">
           <small>WEIGHT:</small><br/>
           <input id="id_weight" type="text" name="weight"
-          value="{{ form.weight.value }}" maxlength="4" size="1">
+          {% if form.weight.value != None %} value="{{ form.weight.value }}" {% endif %} maxlength="4" size="1">
           <small>LBS</small>
         </td>
         <td style="width:200px; border:2px solid black; padding-left:10px">
@@ -206,7 +205,7 @@
         <td style="width:250px; border:2px solid black; text-align:center">
           <small>PHOTO DATE (YYYY-MM-DD):</small><br/>
           <input id="id_photo_date" type="text" name="photo_date"
-          value="{{ form.photo_date.value }}" maxlength="12" size="6">
+          {% if form.photo_date.value != None %} value="{{ form.photo_date.value|date:"Y-m-d" }}" {% endif %} maxlength="10" size="5">
         </td>
       </tr>
       <tr style="border:2px solid black">
@@ -373,7 +372,7 @@
           value="{{ form.c1_cell.value }}" maxlength="14" size="6">
           &nbsp; &nbsp; &nbsp;
           <small>EMAIL:</small>
-          <input id="id_c1_email" type="text" name="c1_email"
+          <input id="id_c1_email" type="email" name="c1_email"
           value="{{ form.c1_email.value }}" maxlength="128" size="15">
         </td>
       </tr>
@@ -409,7 +408,7 @@
           value="{{ form.c2_cell.value }}" maxlength="14" size="6">
           &nbsp; &nbsp; &nbsp;
           <small>EMAIL:</small>
-          <input id="id_c2_email" type="text" name="c2_email"
+          <input id="id_c2_email" type="email" name="c2_email"
           value="{{ form.c2_email.value }}" maxlength="128" size="15">
         </td>
       </tr>
@@ -445,7 +444,7 @@
           value="{{ form.c3_cell.value }}" maxlength="14" size="6">
           &nbsp; &nbsp; &nbsp;
           <small>EMAIL:</small>
-          <input id="id_c3_email" type="text" name="c3_email"
+          <input id="id_c3_email" type="email" name="c3_email"
           value="{{ form.c3_email.value }}" maxlength="128" size="15">
         </td>
       </tr>
@@ -501,7 +500,7 @@
           value="{{ form.ac1_cell.value }}" maxlength="14" size="6">
           &nbsp; &nbsp; &nbsp;
           <small>EMAIL:</small>
-          <input id="id_ac1_email" type="text" name="ac1_email"
+          <input id="id_ac1_email" type="email" name="ac1_email"
           value="{{ form.ac1_email.value }}" maxlength="128" size="15">
         </td>
       </tr>
@@ -537,7 +536,7 @@
           value="{{ form.c4_cell.value }}" maxlength="14" size="6">
           &nbsp; &nbsp; &nbsp;
           <small>EMAIL:</small>
-          <input id="id_c4_email" type="text" name="c4_email"
+          <input id="id_c4_email" type="email" name="c4_email"
           value="{{ form.c4_email.value }}" maxlength="128" size="15">
         </td>
       </tr>
@@ -593,7 +592,7 @@
           value="{{ form.ac2_cell.value }}" maxlength="14" size="6">
           &nbsp; &nbsp; &nbsp;
           <small>EMAIL:</small>
-          <input id="id_ac2_email" type="text" name="ac2_email"
+          <input id="id_ac2_email" type="email" name="ac2_email"
           value="{{ form.ac2_email.value }}" maxlength="128" size="15">
         </td>
       </tr>
@@ -602,8 +601,7 @@
     <table style="width:1200px">
       <tr>
         <th style="width:400px; text-align:left">
-          <strong>Date Reviewed: {{ form.date_reviewed.value }} </strong><br/>
-          <strong>Last Updated By: {{ form.update_first_name.value }} {{ form.update_last_name.value }}</strong>
+          &nbsp;
         </th>
         <th style="width:600px; text-align:left"><h3>EMERGENCY FACT SHEET </h3></th>
         <th style="width:200px; text-align:right">
@@ -744,7 +742,9 @@
           value="{{ form.last_seen.value }}" maxlength="128" size="48">
         </td>
         <td colspan="1">
-          {{ form.last_seen_date }}
+          <input id="id_last_seen_date" type="text" name="last_seen_date"
+          {% if form.last_seen_date.vale != None %} value="{{ form.last_seen.value|date:"Y-m-d" }}"
+          {% endif %} maxlength="10" size="5">
         </td>
       </tr>
     </table>
